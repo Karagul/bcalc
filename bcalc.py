@@ -42,8 +42,7 @@ if __name__ == '__main__':
     # Figure out what needs to be calculated 
     try:
         price, dmac, dmod = calculate(args.face, args.coupon, float(args.maturity), args.discount) 
-        dollardur = dmod * (args.position * price/100 * args.face)
-        dv01 = dollardur * 0.01
+        mv = (args.position * price/100 * args.face)
     except TypeError:
         raise Error ('Error in input, please check')
     
@@ -56,7 +55,8 @@ if __name__ == '__main__':
     print('Discount: %s' % args.discount) 
     print('DMac: %s' %dmac) 
     print('DMod: %s' %dmod) 
-    print('Dollar Duration: %s' %dollardur)     
-    print('DV01: %s' % dv01) 
+    print('Market Value: %s' % mv)   
+    print('Dollar Duration: %s' % (mv*dmod))     
+    print('DV01: %s' % ((mv*dmod) * 0.01)) 
     
     
